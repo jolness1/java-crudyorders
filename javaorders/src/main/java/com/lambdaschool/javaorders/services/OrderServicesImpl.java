@@ -1,5 +1,6 @@
 package com.lambdaschool.javaorders.services;
 
+import com.lambdaschool.javaorders.models.Customer;
 import com.lambdaschool.javaorders.models.Order;
 import com.lambdaschool.javaorders.repositories.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,20 @@ public class OrderServicesImpl implements OrderServices {
     // anytime you are saving, transactional
     @Override public Order save(Order order)
     {
-        return orderrepos.save(order);
+        Order newOrder = new Order();
+        if (order.getOrdnum() !=0 )
+        {
+            orderrepos.findById(order.getOrdnum())
+                .orElseThrow(() -> new EntityNotFoundException("Order " + order.getOrdnum() + " not found"));
+            newOrder.setOrdnum(order.getOrdnum());
+        }
+// Validation
+        newOrder.setCustomer(order.getCustomer());
+        newOrder.setOrdamount(order.getOrdamount());
+        newOrder.setAdvanceamount(order.getAdvanceamount());
+        newOrder.setOrderdescription(order.getOrderdescription());
+
+        return orderrepos.save(newOrder);
     }
 
     @Override

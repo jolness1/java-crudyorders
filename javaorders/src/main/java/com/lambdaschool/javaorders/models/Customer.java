@@ -38,6 +38,11 @@ public class Customer {
     private double outstandingamt;
     private String phone;
 
+    @Transient public boolean hasvalueforopeningamt = false;
+    @Transient public boolean hasvalueforrecieveamt = false;
+    @Transient public boolean hasvalueforpaymentamt = false;
+    @Transient public boolean hasvalueforoutstandingamt = false;
+
     public Customer()
     {
     }
@@ -127,6 +132,7 @@ public class Customer {
     }
 
     public void setOpeningamt(double openingamt) {
+        hasvalueforopeningamt = true;
         this.openingamt = openingamt;
     }
 
@@ -135,6 +141,7 @@ public class Customer {
     }
 
     public void setReceiveamt(double receiveamt) {
+        hasvalueforrecieveamt = true;
         this.receiveamt = receiveamt;
     }
 
@@ -143,6 +150,7 @@ public class Customer {
     }
 
     public void setPaymentamt(double paymentamt) {
+        hasvalueforpaymentamt = true;
         this.paymentamt = paymentamt;
     }
 
@@ -151,6 +159,7 @@ public class Customer {
     }
 
     public void setOutstandingamt(double outstandingamt) {
+        hasvalueforoutstandingamt = true;
         this.outstandingamt = outstandingamt;
     }
 
@@ -160,5 +169,8 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setCustomerid(int i) {
     }
 }
